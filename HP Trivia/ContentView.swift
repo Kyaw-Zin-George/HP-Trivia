@@ -6,14 +6,30 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct ContentView: View {
+    //creating audio property
+    @State private var audioPlayer: AVAudioPlayer!
+    @State private var scalePlayButton = false
+    @State private var moveBackgroundImage = false
+    
     var body: some View {
         GeometryReader{ geo in
             ZStack{
                 Image("hogwarts")
                     .resizable()
                     .frame(width: geo.size.width * 3, height: geo.size.height)
+                    .padding(.top, 3)
+                //adding animation
+                // how the image will be moved(horizontally)
+                    .offset(x: moveBackgroundImage ? geo.size.width / 1.1 : -geo.size.width / 1.1)
+                //what to do when the screen appears
+                    .onAppear{
+                    withAnimation(.linear(duration: 60).repeatForever()) {
+                        moveBackgroundImage.toggle()
+                    }
+                }
                 
                 VStack{
                     VStack{
@@ -69,6 +85,12 @@ struct ContentView: View {
                                 .background(.brown)
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                         }
+                        .scaleEffect(scalePlayButton ? 1.2 : 1)
+                        .onAppear{
+                            withAnimation(.easeInOut(duration: 1.3).repeatForever()) {
+                                scalePlayButton.toggle()
+                            }
+                        }
                         
                         Spacer()
                         
@@ -88,6 +110,15 @@ struct ContentView: View {
             .frame(width: geo.size.width, height: geo.size.height)
             
         }.ignoresSafeArea()
+            .onAppear{
+                playAudio()
+            }
+    }
+    private func playAudio() {
+        let sound = Bundle.main.path(forResource: "magic-in-the-air", ofType: "mp3")
+        audioPlayer = try! AVAudioPlayer(contentsOf: URL(filePath: sound!))
+        audioPlayer.numberOfLoops = -1
+        audioPlayer.play()
     }
 }
 
