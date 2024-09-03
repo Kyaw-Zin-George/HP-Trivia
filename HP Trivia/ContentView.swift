@@ -56,7 +56,7 @@ struct ContentView: View {
                                 .shadow(radius: 5)
                         }
                         
-                      
+                      Spacer()
                         
                         Button{
                             
