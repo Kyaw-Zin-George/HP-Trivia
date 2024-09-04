@@ -18,6 +18,7 @@ struct ContentView: View {
     //showing screen
     @State private var showInstructionsScreen = false
     @State private var showSettingsScreen = false
+    @State private var showGamePlay = false
     var body: some View {
         GeometryReader{ geo in
             ZStack{
@@ -101,6 +102,8 @@ struct ContentView: View {
                         VStack {
                             if animateViewsIn {
                                 Button{
+                                    //Go to gameplay
+                                    showGamePlay.toggle()
                                     
                                 }label: {
                                     Text("Play")
@@ -120,6 +123,9 @@ struct ContentView: View {
                                 }
                                 //setting location to appear from when the screen appears
                                 .transition(.offset(y:geo.size.height / 3))
+                                .fullScreenCover(isPresented: $showGamePlay){
+                                    Gameplay()
+                                }
                             }
                         }// adding animation
                         .animation(.easeOut(duration: 0.7).delay(2), value: animateViewsIn)
