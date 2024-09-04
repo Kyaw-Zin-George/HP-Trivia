@@ -21,6 +21,7 @@
 		26685A342C8161E3006E742C /* spellcraft.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26685A2B2C8161E3006E742C /* spellcraft.mp3 */; };
 		26685A362C816204006E742C /* trivia.json in Resources */ = {isa = PBXBuildFile; fileRef = 26685A352C816204006E742C /* trivia.json */; };
 		26685A382C81629F006E742C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26685A372C81629F006E742C /* Constant.swift */; };
+		26685A6F2C887332006E742C /* Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26685A6E2C887332006E742C /* Instructions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		26685A2B2C8161E3006E742C /* spellcraft.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spellcraft.mp3; sourceTree = "<group>"; };
 		26685A352C816204006E742C /* trivia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trivia.json; sourceTree = "<group>"; };
 		26685A372C81629F006E742C /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		26685A6E2C887332006E742C /* Instructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instructions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,13 +73,13 @@
 		26685A152C8161CA006E742C /* HP Trivia */ = {
 			isa = PBXGroup;
 			children = (
+				26685A702C887382006E742C /* Constants */,
+				26685A6D2C887319006E742C /* Views */,
 				26685A162C8161CA006E742C /* HP_TriviaApp.swift */,
 				26685A2C2C8161E3006E742C /* Audio */,
-				26685A182C8161CA006E742C /* ContentView.swift */,
 				26685A1A2C8161CB006E742C /* Assets.xcassets */,
 				26685A352C816204006E742C /* trivia.json */,
 				26685A1C2C8161CB006E742C /* Preview Content */,
-				26685A372C81629F006E742C /* Constant.swift */,
 			);
 			path = "HP Trivia";
 			sourceTree = "<group>";
@@ -103,6 +105,23 @@
 				26685A2B2C8161E3006E742C /* spellcraft.mp3 */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		26685A6D2C887319006E742C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26685A182C8161CA006E742C /* ContentView.swift */,
+				26685A6E2C887332006E742C /* Instructions.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		26685A702C887382006E742C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				26685A372C81629F006E742C /* Constant.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +205,7 @@
 			files = (
 				26685A192C8161CA006E742C /* ContentView.swift in Sources */,
 				26685A172C8161CA006E742C /* HP_TriviaApp.swift in Sources */,
+				26685A6F2C887332006E742C /* Instructions.swift in Sources */,
 				26685A382C81629F006E742C /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
