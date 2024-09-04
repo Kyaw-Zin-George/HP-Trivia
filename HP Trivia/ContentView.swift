@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var audioPlayer: AVAudioPlayer!
     @State private var scalePlayButton = false
     @State private var moveBackgroundImage = false
+    //trigger the animation for the transition
+    @State private var animateViewsIn = false
     
     var body: some View {
         GeometryReader{ geo in
@@ -26,24 +28,30 @@ struct ContentView: View {
                     .offset(x: moveBackgroundImage ? geo.size.width / 1.1 : -geo.size.width / 1.1)
                 //what to do when the screen appears
                     .onAppear{
-                    withAnimation(.linear(duration: 60).repeatForever()) {
-                        moveBackgroundImage.toggle()
+                        withAnimation(.linear(duration: 60).repeatForever()) {
+                            moveBackgroundImage.toggle()
+                        }
                     }
-                }
                 
                 VStack{
-                    VStack{
-                        Image(systemName: "bolt.fill")
-                            .font(.largeTitle)
-                            .imageScale(.large)
-                        
-                        Text("HP")
-                            .font(.custom(Constant.hpFont,size: 70))
-                        //to get closer to hp and trivia
-                            .padding(.bottom, -50)
-                        Text("Trivia")
-                            .font(.custom(Constant.hpFont, size: 60))
-                    }.padding(.top, 70)
+                   VStack {
+                        if animateViewsIn{
+                            VStack{
+                                Image(systemName: "bolt.fill")
+                                    .font(.largeTitle)
+                                    .imageScale(.large)
+                                
+                                Text("HP")
+                                    .font(.custom(Constant.hpFont,size: 70))
+                                //to get closer to hp and trivia
+                                    .padding(.bottom, -50)
+                                Text("Trivia")
+                                    .font(.custom(Constant.hpFont, size: 60))
+                            }.padding(.top, 70)
+                            //needs animation to work the transition
+                                .transition(.move(edge: .top))
+                        }
+                   }.animation(.easeOut(duration: 0.7).delay(2), value: animateViewsIn)
                     
                     Spacer()
                     
@@ -72,7 +80,7 @@ struct ContentView: View {
                                 .shadow(radius: 5)
                         }
                         
-                      Spacer()
+                        Spacer()
                         
                         Button{
                             
@@ -105,13 +113,16 @@ struct ContentView: View {
                         Spacer()
                     }.frame(width: geo.size.width)
                     Spacer()
+                    
                 }
             }
             .frame(width: geo.size.width, height: geo.size.height)
             
         }.ignoresSafeArea()
             .onAppear{
-                playAudio()
+                // playAudio()
+                //trigger the animation
+                animateViewsIn = true
             }
     }
     private func playAudio() {
