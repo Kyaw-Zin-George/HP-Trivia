@@ -55,61 +55,83 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    VStack{
-                        Text("Recent Scores:")
-                            .font(.title2)
-                        Text("33")
-                        Text("53")
-                        Text("20")
-                    }
-                    .font(.title3)
-                    .padding(.horizontal)
-                    .foregroundStyle(.white)
-                    .background(.black.opacity(0.7))
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    VStack {
+                        if animateViewsIn {
+                            VStack{
+                                Text("Recent Scores:")
+                                    .font(.title2)
+                                Text("33")
+                                Text("53")
+                                Text("20")
+                            }
+                            .font(.title3)
+                            .padding(.horizontal)
+                            .foregroundStyle(.white)
+                            .background(.black.opacity(0.7))
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            //just want to appear not come from a place
+                        .transition(.opacity)
+                        }
+                    }.animation(.linear(duration: 1).delay(4), value: animateViewsIn)
                     Spacer()
                     
                     HStack{
                         Spacer()
-                        Button{
-                            //
-                        } label: {
-                            Image(systemName: "info.circle.fill")
-                                .font(.largeTitle)
-                                .foregroundStyle(.white)
-                                .shadow(radius: 5)
-                        }
-                        
-                        Spacer()
-                        
-                        Button{
-                            
-                        }label: {
-                            Text("Play")
-                                .font(.largeTitle)
-                                .foregroundStyle(.white)
-                                .padding(.vertical, 7)
-                                .padding(.horizontal, 50)
-                                .background(.brown)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                        }
-                        .scaleEffect(scalePlayButton ? 1.2 : 1)
-                        .onAppear{
-                            withAnimation(.easeInOut(duration: 1.3).repeatForever()) {
-                                scalePlayButton.toggle()
+                        VStack {
+                            if animateViewsIn {
+                                Button{
+                                    //
+                                } label: {
+                                    Image(systemName: "info.circle.fill")
+                                        .font(.largeTitle)
+                                        .foregroundStyle(.white)
+                                        .shadow(radius: 5)
+                                }.transition(.offset(x:-geo.size.width/4))
                             }
-                        }
+                        }.animation(.easeOut(duration: 0.7).delay(2.7), value: animateViewsIn)
                         
                         Spacer()
                         
-                        Button{
-                            
-                        }label: {
-                            Image(systemName: "gearshape.fill")
-                                .font(.largeTitle)
-                                .foregroundStyle(.white)
-                                .shadow(radius: 5)
-                        }
+                        VStack {
+                            if animateViewsIn {
+                                Button{
+                                    
+                                }label: {
+                                    Text("Play")
+                                        .font(.largeTitle)
+                                        .foregroundStyle(.white)
+                                        .padding(.vertical, 7)
+                                        .padding(.horizontal, 50)
+                                        .background(.brown)
+                                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                                }
+                                //to move the button up and down forever
+                                .scaleEffect(scalePlayButton ? 1.2 : 1)
+                                .onAppear{
+                                    withAnimation(.easeInOut(duration: 1.3).repeatForever()) {
+                                        scalePlayButton.toggle()
+                                    }
+                                }
+                                //setting location to appear from when the screen appears
+                                .transition(.offset(y:geo.size.height / 3))
+                            }
+                        }// adding animation
+                        .animation(.easeOut(duration: 0.7).delay(2), value: animateViewsIn)
+                        
+                        Spacer()
+                        
+                        VStack {
+                            if animateViewsIn {
+                                Button{
+                                    
+                                }label: {
+                                    Image(systemName: "gearshape.fill")
+                                        .font(.largeTitle)
+                                        .foregroundStyle(.white)
+                                        .shadow(radius: 5)
+                                }.transition(.offset(x: geo.size.width/4))
+                            }
+                        }.animation(.easeOut(duration: 0.7).delay(2.7),value: animateViewsIn)
                         Spacer()
                     }.frame(width: geo.size.width)
                     Spacer()
