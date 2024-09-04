@@ -22,6 +22,7 @@
 		26685A362C816204006E742C /* trivia.json in Resources */ = {isa = PBXBuildFile; fileRef = 26685A352C816204006E742C /* trivia.json */; };
 		26685A382C81629F006E742C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26685A372C81629F006E742C /* Constant.swift */; };
 		26685A6F2C887332006E742C /* Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26685A6E2C887332006E742C /* Instructions.swift */; };
+		26685A722C88806A006E742C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26685A712C88806A006E742C /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		26685A352C816204006E742C /* trivia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trivia.json; sourceTree = "<group>"; };
 		26685A372C81629F006E742C /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		26685A6E2C887332006E742C /* Instructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instructions.swift; sourceTree = "<group>"; };
+		26685A712C88806A006E742C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			children = (
 				26685A182C8161CA006E742C /* ContentView.swift */,
 				26685A6E2C887332006E742C /* Instructions.swift */,
+				26685A712C88806A006E742C /* Settings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				26685A172C8161CA006E742C /* HP_TriviaApp.swift in Sources */,
 				26685A6F2C887332006E742C /* Instructions.swift in Sources */,
 				26685A382C81629F006E742C /* Constant.swift in Sources */,
+				26685A722C88806A006E742C /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
