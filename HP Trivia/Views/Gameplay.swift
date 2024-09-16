@@ -22,6 +22,7 @@ struct Gameplay: View {
     @State private var revealBook = false
     //to connect different view to set as one view
     @Namespace private var nameSpace
+    @State private var wrongAnswersTapped : [Int] = []
     
     //temp data
     let tempAnswers = [true,false,false,false]
@@ -60,6 +61,7 @@ struct Gameplay: View {
                                 .multilineTextAlignment(.center)
                                 .padding()
                                 .transition(.scale)
+                                .opacity(tappedCorrectAnswer ? 0.1 : 1)
                         }
                     }.animation(.easeInOut(duration: 2),value: animateViewsIn)
                     
@@ -105,6 +107,8 @@ struct Gameplay: View {
                                     .opacity(revealHint ? 1:0)
                                     .scaleEffect(revealHint ? 1.33 : 1)
                                 )
+                                .opacity(tappedCorrectAnswer ? 0.1 : 1)
+                                .disabled(tappedCorrectAnswer)
                             }
                         }.animation(.easeOut(duration: 1.5).delay(2),value:  animateViewsIn)
                         
@@ -150,6 +154,8 @@ struct Gameplay: View {
                                     .opacity(revealBook ? 1:0)
                                     .scaleEffect(revealBook ? 1.33 : 1)
                                 )
+                                .opacity(tappedCorrectAnswer ? 0.1 : 1)
+                                .disabled(tappedCorrectAnswer)
                             }
                         }.animation(.easeOut(duration: 1.5).delay(2),value: animateViewsIn)
                         
@@ -183,6 +189,7 @@ struct Gameplay: View {
                                 }.animation(.easeOut(duration: 1).delay(1.5),value: animateViewsIn)
                             }
                             else{
+                                //incorrect answer
                                 VStack {
                                     if animateViewsIn {
                                         Text("Answer: \(i)")
@@ -191,9 +198,18 @@ struct Gameplay: View {
                                             .multilineTextAlignment(.center)
                                             .padding(10)
                                             .frame(width: geo.size.width / 2.15, height: 80)
-                                            .background(.green.opacity(0.5))
+                                            .background( wrongAnswersTapped.contains(i) ? .red.opacity(0.5) : .green.opacity(0.5))
                                             .clipShape(RoundedRectangle(cornerRadius: 25))
                                         .transition(.scale)
+                                        .onTapGesture {
+                                            withAnimation(.easeOut(duration: 1)){
+                                                wrongAnswersTapped.append(i)
+                                            }
+                                        }
+                                        .scaleEffect(wrongAnswersTapped.contains(i) ? 0.8: 1)
+                                        .disabled(tappedCorrectAnswer || wrongAnswersTapped.contains(i))
+                                        .opacity(tappedCorrectAnswer ? 0.1: 1)
+                                        
                                     }
                                 }.animation(.easeOut(duration: 1).delay(1.5), value: animateViewsIn)
                             }
@@ -262,7 +278,16 @@ struct Gameplay: View {
                     VStack {
                         if tappedCorrectAnswer {
                             Button{
+                                animateViewsIn = false
+                                tappedCorrectAnswer = false
+                                revealBook = false
+                                revealHint = false
+                                movePointsToScore = false
+                                wrongAnswersTapped = []
                                 
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                                    animateViewsIn = true
+                                }
                             }label: {
                                 Text("Next Level>")
                                 //TODO: Reset level for next question
